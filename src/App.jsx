@@ -145,7 +145,7 @@ function App() {
           </span>
           <span>
             <strong>ADVOCATE SUBHAN</strong>
-            <small>LEGAL PRACTICE · NELLORE</small>
+            <small>LEGAL PRACTICE · </small>
           </span>
         </a>
         <button
@@ -179,7 +179,7 @@ function App() {
           <div className="hero-grid">
             <div className="hero-copy">
               <div className="eyebrow">
-                <span className="eyebrow-line" /> LEGAL GUIDANCE IN NELLORE
+                <span className="eyebrow-line" /> LEGAL GUIDANCE IN 
               </div>
               <h1>
                 Clarity in law.
@@ -242,7 +242,7 @@ function App() {
                 </span>
               </div>
               <div className="visual-note">
-                <span className="note-dot" /> NELLORE, ANDHRA PRADESH
+                <span className="note-dot" /> , ANDHRA PRADESH
               </div>
             </div>
           </div>
@@ -259,7 +259,7 @@ function App() {
             </span>
             <div>
               <small>LOCATION</small>
-              <strong>ZP Colony, Nellore</strong>
+              <strong>, Andhra Pradesh 524002</strong>
             </div>
           </div>
           <div className="fact">
@@ -334,7 +334,7 @@ function App() {
             <div className="about-image-label">
               <Scale size={20} />
               <span>
-                ADVOCATE SUBHAN<small>NELLORE, ANDHRA PRADESH</small>
+                ADVOCATE SUBHAN<small>, ANDHRA PRADESH</small>
               </span>
             </div>
           </div>
@@ -345,7 +345,7 @@ function App() {
             </h2>
             <p>
               Every legal matter has its own circumstances. Advocate Subhan is
-              based in Nellore and handles enquiries across civil, criminal,
+              based in  and handles enquiries across civil, criminal,
               land and property, cheque bounce, bail and related matters.
             </p>
             <p>
@@ -553,11 +553,11 @@ function App() {
             </div>
             <div className="map-card">
               <iframe
-                title="Map search for Advocate Subhan location in Nellore"
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(c.mapQuery)}&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+  title="Map search for Advocate Subhan location in "
+  src="https://maps.google.com/maps?q=14.4473382,79.967574&z=17&output=embed"
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
               <a
                 href={mapsUrl}
                 target="_blank"
@@ -663,12 +663,12 @@ function App() {
             </span>
             <span>
               <strong>ADVOCATE SUBHAN</strong>
-              <small>LEGAL PRACTICE · NELLORE</small>
+              <small>LEGAL PRACTICE · </small>
             </span>
           </a>
           <p>
             Professional legal enquiries for civil, criminal, property and
-            related matters in Nellore, Andhra Pradesh.
+            related matters in , Andhra Pradesh.
           </p>
           <div className="footer-links">
             {nav.map(([label, href]) => (
