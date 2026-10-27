@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Replace example.com with the verified production domain before launch.
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://advocate-subhan.vercel.app/sitemap.xml
