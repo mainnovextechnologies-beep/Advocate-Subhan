@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Replace example.com with the actual live domain before deployment. -->
   <url>
-    <loc>https://www.example.com/</loc>
+    <loc>https://advocate-subhan.vercel.app/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
