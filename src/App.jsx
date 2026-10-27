@@ -53,6 +53,9 @@ const galleryImages = [
   '/images/subhan04.png',
   '/images/subhan05.png',
   '/images/subhan06.png',
+  '/images/subhan07.png',
+  '/images/subhan08.png',
+
 ].map((src) => ({
   src,
   name: src.split('/').pop(),
