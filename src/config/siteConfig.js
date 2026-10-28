@@ -4,7 +4,7 @@ export const siteConfig = {
   phoneDisplay: '+91 96039 79745',
   phone: '+919603979745',
   whatsapp: '919603979745',
-  address: 'ZP Colony, Nellore, Andhra Pradesh 524004, India',
+  address: 'Near Balaji Nagar,Nellore, Andhra Pradesh 524002, India',
   profileImage: '/images/subhan001.png',
   logo: '/images/ma-innovex-logo.png',
   rating: '5.0',
