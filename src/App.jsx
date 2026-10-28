@@ -70,11 +70,10 @@ function App() {
     category: "Civil matter",
     details: "",
     contact: "WhatsApp",
-    
   });
   const [formError, setFormError] = useState("");
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery || "Near Balaji Colony Nellore Andhra Pradesh 524002")}`;
-  const phoneDigits = String(c.phoneWhatsApp || c.phone || c.phoneDisplay || "").replace(/\\D/g, "");
+  const phoneDigits = String(c.phoneWhatsApp || c.phone || c.phoneDisplay || "").replace(/\D/g, "");
   const callHref = phoneDigits ? `tel:+${phoneDigits}` : "";
   const whatsappHref = (message = "") => phoneDigits
     ? `https://wa.me/${phoneDigits}?text=${encodeURIComponent(message)}`
@@ -176,7 +175,7 @@ function App() {
                 </button>
                 <button
                   className="btn btn-outline"
-                  onClick={() => callHref ? (window.location.href = callHref) : document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+                  onClick={() => (callHref ? (window.location.href = callHref) : document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }))}
                 >
                   <Phone size={17} /> Call the office
                 </button>
@@ -666,7 +665,7 @@ function App() {
       </footer>
       <div className="floating-actions">
         <button
-          onClick={() => window.open(whatsappHref("Hello Advocate Subhan, I would like to make a legal enquiry."), "_blank", "noopener,noreferrer")
+          onClick={() => window.open(whatsappHref("Hello Advocate Subhan, I would like to make a legal enquiry."), "_blank", "noopener,noreferrer")}
           aria-label="Contact Advocate Subhan on WhatsApp"
           className="float-whatsapp"
         >
@@ -674,7 +673,7 @@ function App() {
           <span>WhatsApp</span>
         </button>
         <button
-          onClick={() => callHref ? (window.location.href = callHref) : document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+                  onClick={() => (callHref ? (window.location.href = callHref) : document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }))}
           aria-label="Call Advocate Subhan"
           className="float-call"
         >
