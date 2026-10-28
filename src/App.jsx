@@ -60,46 +60,8 @@ const galleryImages = [
   src,
   name: src.split('/').pop(),
 }));
-function DemoNotice({ open, onClose, action }) {
-  if (!open) return null;
-  return (
-    <div
-      className="modal-backdrop"
-      role="presentation"
-      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
-    >
-      <section
-        className="demo-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="demo-title"
-      >
-        <button
-          className="modal-close"
-          onClick={onClose}
-          aria-label="Close notice"
-        >
-          <X size={20} />
-        </button>
-        <div className="modal-icon">
-          <Shield size={26} />
-        </div>
-        <p className="eyebrow">DEMO WEBSITE</p>
-        <h2 id="demo-title">This is a website preview</h2>
-        <p>
-          The {action} feature is shown for demonstration. It will be connected
-          and enabled when the website is published on the live domain.
-        </p>
-        <button className="btn btn-primary full" onClick={onClose}>
-          Got it
-        </button>
-      </section>
-    </div>
-  );
-}
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [notice, setNotice] = useState("");
   const [faqOpen, setFaqOpen] = useState(0);
   const [previewImage, setPreviewImage] = useState(null);
   const [form, setForm] = useState({
@@ -110,34 +72,44 @@ function App() {
     contact: "WhatsApp",
   });
   const [formError, setFormError] = useState("");
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery || "Near Balaji Colony Nellore Andhra Pradesh 524002")}`;
+  const phoneDigits = String(c.phoneWhatsApp || c.phone || c.phoneDisplay || "").replace(/\\D/g, "");
+  const callHref = phoneDigits ? `tel:+${phoneDigits}` : "";
+  const whatsappHref = (message = "") => phoneDigits
+    ? `https://wa.me/${phoneDigits}?text=${encodeURIComponent(message)}`
+    : "https://wa.me/";
   const nav = [
     ["Practice areas", "#practice"],
     ["About", "#about"],
     ["Reviews", "#reviews"],
     ["Contact", "#contact"],
   ];
-  const demoAction = (what) => setNotice(what);
   const submitForm = (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim() || !form.category) {
-      setFormError(
-        "Please fill in your name, phone number and matter category.",
-      );
+      setFormError("Please fill in your name, phone number and matter category.");
       return;
     }
     setFormError("");
-    setNotice("WhatsApp enquiry");
+    const message = [
+      "Legal enquiry for Advocate Subhan",
+      `Name: ${form.name.trim()}`,
+      `Contact number: ${form.phone.trim()}`,
+      `Matter: ${form.category}`,
+      form.details.trim() ? `Details: ${form.details.trim()}` : "",
+      `Preferred contact: ${form.contact}`,
+    ].filter(Boolean).join("\\n");
+    if (form.contact === "Phone call") {
+      if (callHref) window.location.href = callHref;
+      else setFormError("Office phone number is not configured. Update phoneWhatsApp or phoneDisplay in config/siteConfig.");
+    } else {
+      window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
+    }
   };
   const updateForm = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
   return (
     <>
-      <div className="demo-strip">
-        <span className="demo-dot" /> DEMO PREVIEW{" "}
-        <span className="strip-divider">|</span> Call and WhatsApp actions are
-        simulated
-      </div>
       <header className="site-header">
         <a href="#home" className="brand" aria-label="Advocate Subhan home">
           <span className="brand-mark">
@@ -179,7 +151,7 @@ function App() {
           <div className="hero-grid">
             <div className="hero-copy">
               <div className="eyebrow">
-                <span className="eyebrow-line" /> LEGAL GUIDANCE IN 
+                <span className="eyebrow-line" /> LEGAL GUIDANCE IN NELLORE
               </div>
               <h1>
                 Clarity in law.
@@ -203,7 +175,7 @@ function App() {
                 </button>
                 <button
                   className="btn btn-outline"
-                  onClick={() => demoAction("call")}
+                  onClick={() => callHref ? (window.location.href = callHref) : document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
                 >
                   <Phone size={17} /> Call the office
                 </button>
@@ -242,7 +214,7 @@ function App() {
                 </span>
               </div>
               <div className="visual-note">
-                <span className="note-dot" /> , ANDHRA PRADESH
+                <span className="note-dot" /> NELLORE, ANDHRA PRADESH
               </div>
             </div>
           </div>
@@ -259,7 +231,7 @@ function App() {
             </span>
             <div>
               <small>LOCATION</small>
-              <strong>, Andhra Pradesh 524002</strong>
+              <strong>Near Balaji Colony Nellore Andhra Pradesh 524002</strong>
             </div>
           </div>
           <div className="fact">
@@ -276,7 +248,7 @@ function App() {
               <Star size={20} />
             </span>
             <div>
-              <small>GOOGLE RATING PROVIDED</small>
+              <small>CLIENT RATING</small>
               <strong>
                 {c.rating} / 5{" "}
                 <span className="fact-muted">({c.reviewCount} reviews)</span>
@@ -334,7 +306,7 @@ function App() {
             <div className="about-image-label">
               <Scale size={20} />
               <span>
-                ADVOCATE SUBHAN<small>, ANDHRA PRADESH</small>
+                ADVOCATE SUBHAN<small>NELLORE, ANDHRA PRADESH</small>
               </span>
             </div>
           </div>
@@ -345,7 +317,7 @@ function App() {
             </h2>
             <p>
               Every legal matter has its own circumstances. Advocate Subhan is
-              based in  and handles enquiries across civil, criminal,
+              based in Nellore and handles enquiries across civil, criminal,
               land and property, cheque bounce, bail and related matters.
             </p>
             <p>
@@ -445,15 +417,14 @@ function App() {
                 Words that <em>matter.</em>
               </h2>
               <p>
-                Review excerpts provided for this demo. Please verify the
-                wording and publication permissions before launch.
+                Client feedback and ratings are displayed as provided by the practice.
               </p>
               <div className="rating-summary">
                 <strong>{c.rating}</strong>
                 <div>
                   <span className="stars">★★★★★</span>
                   <small>
-                    Rating supplied by client · {c.reviewCount} reviews
+                    {c.reviewCount} reviews
                   </small>
                 </div>
               </div>
@@ -525,7 +496,7 @@ function App() {
             </h2>
             <p>
               Share a brief outline of your enquiry. Avoid sending confidential
-              documents or unnecessary sensitive details through this demo form.
+              documents or unnecessary sensitive details through the enquiry form.
             </p>
             <div className="contact-detail">
               <span>
@@ -545,15 +516,15 @@ function App() {
               </span>
               <div>
                 <small>PHONE</small>
-                <strong>{c.phoneDisplay}</strong>
+                <strong>{callHref ? <a href={callHref}>{c.phoneDisplay}</a> : c.phoneDisplay}</strong>
                 <small className="muted">
-                  Call action is disabled in this demo preview.
+                  Contact the office directly using the call button.
                 </small>
               </div>
             </div>
             <div className="map-card">
               <iframe
-  title="Map search for Advocate Subhan location in "
+  title="Map showing the office area in Nellore"
   src="https://maps.google.com/maps?q=14.4473382,79.967574&z=17&output=embed"
   loading="lazy"
   referrerPolicy="no-referrer-when-downgrade"
@@ -575,7 +546,7 @@ function App() {
               </span>
               <div>
                 <h3>Enquiry form</h3>
-                <p>Prepare a message for the legal practice</p>
+                <p>Send your enquiry directly via your preferred contact method</p>
               </div>
             </div>
             <label>
@@ -649,8 +620,7 @@ function App() {
               Prepare enquiry <ArrowRight size={17} />
             </button>
             <p className="form-disclaimer">
-              <Shield size={14} /> Demo only. The form does not send or store
-              your details. Live contact features will be enabled after launch.
+              <Shield size={14} /> Your enquiry opens in your selected contact app. Please avoid sharing confidential documents.
             </p>
           </form>
         </section>
@@ -695,27 +665,22 @@ function App() {
       </footer>
       <div className="floating-actions">
         <button
-          onClick={() => demoAction("WhatsApp")}
-          aria-label="WhatsApp demo notice"
+          onClick={() => window.open(whatsappHref("Hello Advocate Subhan, I would like to make a legal enquiry."), "_blank", "noopener,noreferrer")
+          aria-label="Contact Advocate Subhan on WhatsApp"
           className="float-whatsapp"
         >
           <MessageCircle size={22} />
           <span>WhatsApp</span>
         </button>
         <button
-          onClick={() => demoAction("call")}
-          aria-label="Call demo notice"
+          onClick={() => callHref ? (window.location.href = callHref) : document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+          aria-label="Call Advocate Subhan"
           className="float-call"
         >
           <Phone size={20} />
           <span>Call</span>
         </button>
       </div>
-      <DemoNotice
-        open={!!notice}
-        action={notice}
-        onClose={() => setNotice("")}
-      />
     </>
   );
 }
