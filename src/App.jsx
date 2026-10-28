@@ -70,6 +70,7 @@ function App() {
     category: "Civil matter",
     details: "",
     contact: "WhatsApp",
+    
   });
   const [formError, setFormError] = useState("");
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery || "Near Balaji Colony Nellore Andhra Pradesh 524002")}`;
