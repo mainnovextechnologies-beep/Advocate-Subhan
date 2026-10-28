@@ -55,6 +55,7 @@ const galleryImages = [
   '/images/subhan06.png',
   '/images/subhan07.png',
   '/images/subhan08.png',
+  '/images/subhan.jpeg'
 
 ].map((src) => ({
   src,
